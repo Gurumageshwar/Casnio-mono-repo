@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://api.watchmewin.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite": { "^/api": "" }
+  }
+}

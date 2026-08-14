@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://api.fireballcasino.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite": { "^/api": "" }
+  }
+}

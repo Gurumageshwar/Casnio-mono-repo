@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://api.playbison.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "info",
+    "pathRewrite": { "^/api": "" }
+  }
+}

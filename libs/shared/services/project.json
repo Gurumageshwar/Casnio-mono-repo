@@ -1,0 +1,22 @@
+{
+  "name": "shared-services",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/services/src",
+  "prefix": "casino",
+  "tags": ["type:service", "scope:shared"],
+  "targets": {
+    "test": {
+      "executor": "@nx/angular:karma",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/services"],
+      "options": {
+        "main": "libs/shared/services/src/test.ts",
+        "tsConfig": "libs/shared/services/tsconfig.spec.json",
+        "karmaConfig": "libs/shared/services/karma.conf.js"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

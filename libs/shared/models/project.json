@@ -1,0 +1,22 @@
+{
+  "name": "shared-models",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/models/src",
+  "prefix": "casino",
+  "tags": ["type:model", "scope:shared"],
+  "targets": {
+    "test": {
+      "executor": "@nx/angular:karma",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/models"],
+      "options": {
+        "main": "libs/shared/models/src/test.ts",
+        "tsConfig": "libs/shared/models/tsconfig.spec.json",
+        "karmaConfig": "libs/shared/models/karma.conf.js"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "loyalty",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/loyalty/src",
+  "prefix": "casino",
+  "tags": ["type:feature", "scope:shared", "domain:loyalty"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/libs/loyalty"],
+      "options": {
+        "project": "libs/loyalty/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/loyalty/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/loyalty/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/angular:karma",
+      "outputs": ["{workspaceRoot}/coverage/libs/loyalty"],
+      "options": {
+        "main": "libs/loyalty/src/test.ts",
+        "tsConfig": "libs/loyalty/tsconfig.spec.json",
+        "karmaConfig": "libs/loyalty/karma.conf.js"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

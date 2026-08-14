@@ -1,0 +1,85 @@
+{
+  "name": "lemon",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/lemon/src",
+  "prefix": "app",
+  "tags": ["app:lemon", "type:app"],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/lemon",
+        "index": "apps/lemon/src/index.html",
+        "browser": "apps/lemon/src/main.ts",
+        "polyfills": ["zone.js", "@angular/localize/init"],
+        "tsConfig": "apps/lemon/tsconfig.app.json",
+        "assets": ["apps/lemon/src/favicon.ico", "apps/lemon/src/assets"],
+        "styles": ["apps/lemon/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/lemon/src/environments/environment.ts",
+              "with": "apps/lemon/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "budgets": [
+            { "type": "initial", "maximumWarning": "12mb", "maximumError": "15mb" },
+            { "type": "anyComponentStyle", "maximumWarning": "11kb", "maximumError": "300kb" }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": { "buildTarget": "lemon:build:production" },
+        "development": { "buildTarget": "lemon:build:development" }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4200,
+        "host": "0.0.0.0",
+        "proxyConfig": "apps/lemon/src/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": { "buildTarget": "lemon:build" }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["apps/lemon/**/*.ts", "apps/lemon/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:karma",
+      "outputs": ["{workspaceRoot}/coverage/apps/lemon"],
+      "options": {
+        "main": "apps/lemon/src/test.ts",
+        "polyfills": ["zone.js", "zone.js/testing"],
+        "tsConfig": "apps/lemon/tsconfig.spec.json",
+        "karmaConfig": "apps/lemon/karma.conf.js",
+        "assets": ["apps/lemon/src/favicon.ico", "apps/lemon/src/assets"],
+        "styles": ["apps/lemon/src/styles.scss"],
+        "scripts": []
+      }
+    }
+  }
+}

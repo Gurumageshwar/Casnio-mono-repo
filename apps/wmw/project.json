@@ -1,0 +1,86 @@
+{
+  "name": "wmw",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/wmw/src",
+  "prefix": "app",
+  "tags": ["app:wmw", "type:app"],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/wmw",
+        "index": "apps/wmw/src/index.html",
+        "browser": "apps/wmw/src/main.ts",
+        "polyfills": ["zone.js", "@angular/localize/init"],
+        "tsConfig": "apps/wmw/tsconfig.app.json",
+        "assets": ["apps/wmw/src/favicon.ico", "apps/wmw/src/assets"],
+        "styles": ["apps/wmw/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/wmw/src/environments/environment.ts",
+              "with": "apps/wmw/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "budgets": [
+            { "type": "initial", "maximumWarning": "12mb", "maximumError": "15mb" },
+            { "type": "anyComponentStyle", "maximumWarning": "11kb", "maximumError": "300kb" }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": { "buildTarget": "wmw:build:production" },
+        "development": { "buildTarget": "wmw:build:development" }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4202,
+        "host": "0.0.0.0",
+        "proxyConfig": "apps/wmw/src/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": { "buildTarget": "wmw:build" }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["apps/wmw/**/*.ts", "apps/wmw/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/angular:karma",
+      "outputs": ["{workspaceRoot}/coverage/apps/wmw"],
+      "options": {
+        "main": "apps/wmw/src/test.ts",
+        "polyfills": ["zone.js", "zone.js/testing"],
+        "tsConfig": "apps/wmw/tsconfig.spec.json",
+        "karmaConfig": "apps/wmw/karma.conf.js",
+        "assets": ["apps/wmw/src/favicon.ico", "apps/wmw/src/assets"],
+        "styles": ["apps/wmw/src/styles.scss"],
+        "scripts": []
+      }
+    }
+  }
+}
+
