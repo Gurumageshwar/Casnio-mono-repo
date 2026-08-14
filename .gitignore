@@ -47,3 +47,5 @@ Thumbs.db
 *.ps1
 .editorconfig
 .module-boundaries
+.agent/
+.vscode/
